@@ -26,6 +26,7 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    // Route::get('/profile', [ProfileController::class, 'view'])->name('profile.view');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
@@ -38,11 +39,9 @@ Route::controller(App\Http\controllers\DosenController::class)->group(function (
     Route::get('/add-dosen', 'create');
     Route::post('/add-dosen', 'store');
     Route::get('/edit-dosen/{dosen_id}', 'edit');
+    Route::get('/view-dosen/{dosen_id}', 'view');
     Route::put('/update-dosen/{dosen_id}', 'update');
     Route::delete('/delete-dosen/{dosen_id}', 'destroy');
-
-
-
-
-
+    Route::get('/export', [DosenController::class, 'export']);
+    Route::get('/export-pdf', [DosenController::class, 'exportPdf']);
 });

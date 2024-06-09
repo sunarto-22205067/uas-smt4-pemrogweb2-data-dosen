@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('dosens', function (Blueprint $table) {
             $table->id();
+            // $table->increments('id');
             $table->string('nid', 8);
+            $table->foreignId('status_id')->constrained();
             $table->string('nama_dosen', 255);
             $table->string('tempat_lahir');
             $table->date('tanggal_lahir');
@@ -24,6 +26,10 @@ return new class extends Migration
             $table->timestamps();
 
         });
+
+        // Schema::table('dosens', function($table) {
+        //     $table->foreign('status_id')->references('id')->on('status');
+        // });
     }
 
     /**

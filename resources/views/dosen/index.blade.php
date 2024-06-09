@@ -6,54 +6,59 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7x1 mx-auto sm:px-12 lg:px-8">
+
+    <div class="py-6">
+        <div class="max-w-sm mx-auto sm:px-6 lg:px-8">
 
             <x-success-status class="mb-4" :status="session('message')" />
             <div class="py-4 px-4 bg-white overflow-hidden shadow-sm sm:rounded-lg">
-
+                <a href="{{ url('/export') }}" class="btn btn-primary btn-sm" style="margin-bottom: 10px;"><i class="fas fa-edit"></i> Download Excel</a>
+                <a href="{{ url('/export-pdf') }}" class="btn btn-danger btn-sm" style="margin-bottom: 10px;"><i class="fas fa-edit"></i> Download PDF</a>
                 <table class="table table-bordered">
                     <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>NIDN</th>
-                            <th>Nama Dosen</th>
-                            <th>Tempat Lahir</th>
-                            <th>Tanggal Lahir</th>
-                            <th>Jenis Kelamin</th>
-                            <th>Alamat</th>
-                            <th>Email</th>
-                            <th>Nomor Telepon</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
+                        <tr style="background-color: #082564; color: white;">
+                            <th class="text-xs w-5" style="text-align: center;">ID</th>
+                            <th class="text-xs w-10" style="text-align: center;">NIDN</th>
+                            <th class="text-xs w-10" style="text-align: center;">Status</th>
+                            <th class="text-xs w-15" style="text-align: center;">Nama Dosen</th>
+                            <th class="text-xs w-10" style="text-align: center;">Tempat Lahir</th>
+                            <th class="text-xs w-10" style="text-align: center;">Tanggal Lahir</th>
+                            <th class="text-xs w-10" style="text-align: center;">Jenis Kelamin</th>
+                            <th class="text-xs w-15" style="text-align: center;">Alamat</th>
+                            <th class="text-xs w-15" style="text-align: center;">Email</th>
+                            <th class="text-xs w-10" style="text-align: center;">Nomor Telepon</th>
+                            <th class="text-xs w-15" style="text-align: center;">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($dosens as $dosen)
                         <tr>
-                            <td>{{ $dosen->id }}</td>
-                            <td>{{ $dosen->nid }}</td>
-                            <td>{{ $dosen->nama_dosen }}</td>
-                            <td>{{ $dosen->tempat_lahir }}</td>
-                            <td>{{ $dosen->tanggal_lahir }}</td>
-                            <td>{{ $dosen->jenis_kelamin }}</td>
-                            <td>{{ $dosen->alamat_dosen }}</td>
-                            <td>{{ $dosen->email_dosen }}</td>
-                            <td>{{ $dosen->nomor_telepon }}</td>
-                            <td>
-                                <a href="{{ url('/edit-dosen/'.$dosen->id) }}" class="btn btn-primary">Edit</a>
-                            </td>
-                            <td>
-                                <form id="delete-form-{{$dosen->id}}" action="{{url('delete-dosen/'.$dosen->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="button" class="btn btn-danger delete-confirm" data-id="{{$dosen->id}}">Delete</button>
-                                </form>
+                            <td class="text-xs w-5">{{ $dosen->id }}</td>
+                            <td class="text-xs w-10">{{ $dosen->nid }}</td>
+                            <td class="text-xs w-10">{{ $dosen->status->status }}</td>
+                            <td class="text-xs w-15">{{ $dosen->nama_dosen }}</td>
+                            <td class="text-xs w-10">{{ $dosen->tempat_lahir }}</td>
+                            <td class="text-xs w-10">{{ $dosen->tanggal_lahir }}</td>
+                            <td class="text-xs w-10">{{ $dosen->jenis_kelamin }}</td>
+                            <td class="text-xs w-15">{{ $dosen->alamat_dosen }}</td>
+                            <td class="text-xs w-15">{{ $dosen->email_dosen }}</td>
+                            <td class="text-xs w-10">{{ $dosen->nomor_telepon }}</td>
+                            <td class="text-xs w-15">
+                                <div style="display: flex; justify-content: center; align-items: center;">
+                                    <a href="{{ url('/edit-dosen/'.$dosen->id) }}" class="btn btn-primary btn-sm " style="margin-right: 5px;"><i class="fas fa-edit"></i> Edit</a>
+                                    <a href="{{ url('/view-dosen/'.$dosen->id) }}" class="btn btn-primary btn-sm btn-success" style="color: #fff; margin-right: 5px;">View</a>
+                                    <form id="delete-form-{{$dosen->id}}" action="{{url('delete-dosen/'.$dosen->id) }}" method="POST" style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <button type="button" class="btn btn-danger btn-sm delete-confirm" data-id="{{$dosen->id}}" style="background-color: #d33; border-color: #d33;"><i class="fas fa-trash"></i> Delete</button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="11"> No Record Found</td>
+                            <td colspan="10" style="text-align: left;"> No Record Found</td>
                         </tr>
                         @endforelse
                     </tbody>
@@ -87,12 +92,21 @@
                         }
                     });
                 });
-                // Set the button color to red
-                button.style.backgroundColor = '#d33';
-                button.style.borderColor = '#d33';
-                button.style.color = '#fff';
             });
         });
     </script>
+
+    <!-- Footer -->
+    <footer class="py-4 bg-gray-200 text-center absolute bottom-0 w-full">
+        <div class="container">
+            <p style="color: blue;">
+                <!-- Tautan di sekitar teks -->
+                <a href="https://yourwebsite.com" style="color: rgb(55, 55, 207); text-decoration: none;">Copyright © 2024 Kelompok 4 | 2024</a>
+            </p>
+        </div>
+    </footer>
+
+
+
 
 </x-app-layout>

@@ -25,7 +25,7 @@ class DosenRequest extends FormRequest
     return [
         'nid' => [
             'required',
-            'max:15',
+            'max:8',
         ],
         'nama_dosen' => [
             'required',
@@ -49,6 +49,9 @@ class DosenRequest extends FormRequest
             'required',
         ],
         'jenis_kelamin' => [
+            'required',
+        ],
+        'status_id' => [
             'required',
         ],
     ];

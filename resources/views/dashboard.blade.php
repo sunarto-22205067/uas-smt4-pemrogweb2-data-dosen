@@ -14,4 +14,10 @@
             </div>
         </div>
     </div>
+    <!-- Footer -->
+    <footer class="py-4 bg-gray-200 text-center absolute bottom-0 w-full">
+        <div class="container">
+            <p class="text-gray-600">Copyright © 2024 Kelompok | 4</p>
+        </div>
+    </footer>
 </x-app-layout>

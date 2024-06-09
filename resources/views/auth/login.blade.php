@@ -44,4 +44,12 @@
             </x-primary-button>
         </div>
     </form>
+
 </x-guest-layout>
+
+<!-- Footer -->
+<footer class="py-6 bg-gray-200 text-center mt-12">
+    <div class="container">
+        <p class="text-gray-600">Copyright © 2024 Kelompok | 4</p>
+    </div>
+</footer>

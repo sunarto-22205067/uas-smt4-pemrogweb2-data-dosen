@@ -6,6 +6,10 @@ use App\Models\Dosen;
 use Illuminate\Http\Request;
 use App\Http\Requests\DosenRequest;
 use Illuminate\Validation\Rule;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\DosensExport;
+use PDF;
+
 
 class DosenController extends Controller
 {
@@ -24,6 +28,7 @@ class DosenController extends Controller
     {
         $data = $request->validated();
 
+        // echo var_dump($data);
         // Pastikan NID unik sebelum menyimpan
         $dosen = Dosen::firstOrNew(['nid' => $data['nid']]);
         if ($dosen->exists) {
@@ -39,6 +44,12 @@ class DosenController extends Controller
     {
         $dosens = Dosen::find($dosen_id);
         return view('dosen.edit', compact('dosens'));
+    }
+
+    public function view($dosen_id)
+    {
+        $dosens = Dosen::find($dosen_id);
+        return view('dosen.view', compact('dosens'));
     }
 
     public function update(DosenRequest $request, $dosen_id)
@@ -66,4 +77,18 @@ class DosenController extends Controller
         }
         return redirect('/dosen')->with('error', 'Dosen not found');
     }
+
+    public function export()
+    {
+        return Excel::download(new DosensExport, 'dosens.xlsx');
+    }
+
+    public function exportPdf()
+    {
+        $dosens = Dosen::with('status')->get();
+        $pdf = PDF::loadView('dosen.pdf', compact('dosens'));
+
+        return $pdf->download('dosens.pdf');
+    }
+
 }
