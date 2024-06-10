@@ -101,7 +101,7 @@
         <div class="container">
             <p style="color: blue;">
                 <!-- Tautan di sekitar teks -->
-                <a href="https://yourwebsite.com" style="color: rgb(55, 55, 207); text-decoration: none;">Copyright © 2024 Kelompok 4 | 2024</a>
+                <a href="https://stmik-tegal.ac.id/" style="color: rgb(55, 55, 207); text-decoration: none;">Copyright © 2024 Kelompok 4 | 2024</a>
             </p>
         </div>
     </footer>
